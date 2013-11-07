@@ -22,7 +22,7 @@ Features include:
 
 ## Usage
 
-Create your `~/.config/pkgtmpl.ini` with your details. Example contents:
+Create `~/.config/pkgtmpl.ini` with your details. Example contents:
 
     [general]
     full_name = Jacob Magnusson
