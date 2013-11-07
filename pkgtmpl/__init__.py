@@ -111,12 +111,12 @@ def validate_package_type_exists(package_type):
 
 
 def get_package_type_path(package_type):
-    return os.path.join(expand_path('.'), package_type)
+    return os.path.join(expand_path(os.path.dirname(__file__)), package_type)
 
 
 def generate_files(package_type, app_path, template_context):
-    package_type_path = get_package_type_path(package_type)
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader(package_type_path),
+    env = jinja2.Environment(loader=jinja2.PackageLoader('pkgtmpl',
+                                                         package_type),
                              keep_trailing_newline=True)
     os.mkdir(app_path)
     print('Created directory {0}'.format(app_path))
