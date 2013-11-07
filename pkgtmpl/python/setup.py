@@ -30,6 +30,11 @@ setup(
     long_description=read(os.path.join(os.path.dirname(__file__),
                                        'README.md')),
     packages=find_packages(),
+    package_data={
+        pkgname: [
+            # Include non-py files here (no need to begin with 'pkgname/')
+        ],
+    },
     install_requires = [str(ir.req) for ir
                                     in parse_requirements('requirements.txt')],
     entry_points={

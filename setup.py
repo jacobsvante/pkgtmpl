@@ -3,7 +3,7 @@ from __future__ import print_function
 import codecs
 import os
 from pip.req import parse_requirements
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 appname = 'pkgtmpl'
@@ -17,11 +17,16 @@ def read(fn):
 
 setup(
     name=appname,
-    version='0.2.0',
+    version='0.2.1',
     description="Bootstrap python packages with sane defaults",
     long_description=read(os.path.join(os.path.dirname(__file__),
                                        'README.md')),
-    packages=find_packages(),
+    packages=[pkgname],
+    package_data={
+        pkgname: [
+            'python/**/**',
+        ],
+    },
     install_requires = [str(ir.req) for ir
                                     in parse_requirements('requirements.txt')],
     entry_points={

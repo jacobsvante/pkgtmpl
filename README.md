@@ -41,8 +41,7 @@ For more options:
 
 ## Python support
 
-Should support most Python 2 versions. Python 3 needs to be 3.3 or higher
-because of the use of unicode literals.
+Python 2.7+ and Python 3.3+.
 
 
 ## Documentation
