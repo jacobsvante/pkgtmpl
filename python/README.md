@@ -7,11 +7,11 @@
 
 Install using `pip`...
 
-    pip install {{ package_name }}
+    pip install {{ appname }}
 
 ...or clone the project from github.
 
-    git clone https://github.com/{{ github_username }}/{{ package_name }}.git
+    git clone https://github.com/{{ github_username }}/{{ appname }}.git
 
 
 ## Documentation
@@ -19,4 +19,4 @@ Install using `pip`...
 
 
 {% if twitter %}[twitter]: https://twitter.com/{{ twitter }}{% endif %}
-[docs]: https://github.com/{{ github_username }}/{{ package_name }}
+[docs]: https://github.com/{{ github_username }}/{{ appname }}

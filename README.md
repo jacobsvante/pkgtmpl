@@ -2,42 +2,47 @@
 
 ## About
 
-Generate empty packages with sane defaults, for publishing to GitHub.
+Bootstrap python packages with sane defaults
 
-Currently only supports generating python packages. Features for
-python include:
+Features include:
 
 * Generates .gitignore, AUTHORS, CHANGELOG,
   LICENSE (BSD simplified by default), MANIFEST.in, README.md,
   requirements.txt, setup.py, tests.py and tox.ini.
 * Sets your name, github username, package name in the templates by
-  reading a config that should be located @ ~/.config/pkgtmpl.ini or where
-  you specify
+  reading a config that should be located @ ~/.config/pkgtmpl.ini.
 * Optional: Add Travis CI status and twitter account to the readme
 * Sets your name and year in the copyright notice of the license file
 
 
 ## Installation
 
-    $ git clone https://github.com/jmagnusson/pkgtmpl.git
-    $ pip install -r requirements.txt
+    $ pip install pkgtmpl
 
 
 ## Usage
 
-Basic example:
+Create your `~/.config/pkgtmpl.ini` with your details. Example contents:
 
-    $ ./generate mypackage ~/apps/mypackage
+    [general]
+    full_name = Jacob Magnusson
+    email = m@jacobian.se
+    github_username = jmagnusson
+    twitter = pyjacob
 
-For more options, issue the following:
+Basic usage example:
 
-    $ ./generate --help
+    $ pkgtmpl mypackage ~/apps/mypackage
+
+For more options:
+
+    $ pkgtmpl --help
 
 
 ## Python support
 
 Should support most Python 2 versions. Python 3 needs to be 3.3 or higher
-because of the usage of unicode literals.
+because of the use of unicode literals.
 
 
 ## Documentation

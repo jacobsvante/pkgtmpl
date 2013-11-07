@@ -6,16 +6,8 @@ from pip.req import parse_requirements
 from setuptools import setup, find_packages
 
 
-appname = '{{ appname }}'
+appname = 'pkgtmpl'
 pkgname = appname.lower().replace('-', '_')
-metadata_relpath = '{}/metadata.py'.format(pkgname)
-
-# Get package metadata. We use exec here instead of importing the
-# package directly, so we can avoid any potential import errors.
-with open(metadata_relpath) as fh:
-    metadata = {}
-    exec(fh.read(), globals(), metadata)
-
 
 def read(fn):
     with codecs.open(fn, 'r', 'utf-8') as fh:
@@ -25,8 +17,8 @@ def read(fn):
 
 setup(
     name=appname,
-    version=metadata['__version__'],
-    description=metadata['__doc__'],
+    version='0.2.0',
+    description="Bootstrap python packages with sane defaults",
     long_description=read(os.path.join(os.path.dirname(__file__),
                                        'README.md')),
     packages=find_packages(),
@@ -34,13 +26,12 @@ setup(
                                     in parse_requirements('requirements.txt')],
     entry_points={
         'console_scripts': {
-            # Add console scripts here. E.g:
-            # 'cleanup = mypkg.bin.cleanup:main',
+            'pkgtmpl = pkgtmpl:main',
         },
     },
-    author='{{ full_name }}',
-    author_email='{{ email }}',
-    url='https://github.com/{{ github_username }}/{{ appname }}',
+    author='Jacob Magnusson',
+    author_email='m@jacobian.se',
+    url='https://github.com/jmagnusson/pkgtmpl',
     license='BSD',
     platforms=['unix', 'macos'],
     classifiers=[
