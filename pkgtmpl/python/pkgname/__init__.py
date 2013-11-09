@@ -1,1 +1,1 @@
-from .metadata import __version_info__, __version__
+from .metadata import __version_info__, __version__ # NOQA
