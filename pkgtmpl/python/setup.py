@@ -1,7 +1,10 @@
 #!/usr/bin/env python
+"""
+{{ appname }}
+{{ '-' * appname|count }}
+
+"""
 from __future__ import print_function
-import codecs
-import os
 from pip.req import parse_requirements
 from setuptools import setup, find_packages
 
@@ -17,18 +20,11 @@ with open(metadata_relpath) as fh:
     exec(fh.read(), globals(), metadata)
 
 
-def read(fn):
-    with codecs.open(fn, 'r', 'utf-8') as fh:
-        contents = fh.read()
-    return contents
-
-
 setup(
     name=appname,
     version=metadata['__version__'],
-    description=metadata['__doc__'],
-    long_description=read(os.path.join(os.path.dirname(__file__),
-                                       'README.md')),
+    description='',
+    long_description=__doc__,
     packages=find_packages(),
     package_data={
         pkgname: [

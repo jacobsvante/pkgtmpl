@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2
+
+**Date**: 2013-11-09
+
+* Add __doc__ to generated setup.py
+
 ## 0.2.1
 
 **Date**: 2013-11-07
