@@ -24,6 +24,7 @@ FILENAMES = {
         '.travis.yml',
         'CHANGELOG.md',
         'CONTRIBUTORS.md',
+        'TODO.md',
         'LICENSE',
         'MANIFEST.in',
         'README.md',
