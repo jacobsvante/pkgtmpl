@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.3
+
+**Date**: 2013-11-09
+
+* Add PyPI version and download badges to readme
+* Rename AUTHORS to CONTRIBUTORS.md
+* Add TODO.md
+
 ## 0.2.2
 
 **Date**: 2013-11-09
