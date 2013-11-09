@@ -22,8 +22,8 @@ FILENAMES = {
     'python': (
         '.gitignore',
         '.travis.yml',
-        'AUTHORS',
         'CHANGELOG.md',
+        'CONTRIBUTORS.md',
         'LICENSE',
         'MANIFEST.in',
         'README.md',
