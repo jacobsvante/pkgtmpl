@@ -42,8 +42,8 @@ setup(
     long_description=__doc__,
     packages=[pkgname],
     include_package_data=True,
-    install_requires = [str(ir.req) for ir
-                                    in parse_requirements('requirements.txt')],
+    install_requires=[str(ir.req) for ir
+                      in parse_requirements('requirements.txt')],
     entry_points={
         'console_scripts': {
             'pkgtmpl = pkgtmpl:main',

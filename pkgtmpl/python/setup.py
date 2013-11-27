@@ -31,8 +31,8 @@ setup(
             # Include non-py files here (no need to begin with 'pkgname/')
         ],
     },
-    install_requires = [str(ir.req) for ir
-                                    in parse_requirements('requirements.txt')],
+    install_requires=[str(ir.req) for ir
+                      in parse_requirements('requirements.txt')],
     entry_points={
         'console_scripts': {
             # Add console scripts here. E.g:
