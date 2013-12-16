@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.5 (2013-12-16)
+
+* Replace any template variables found in filenames to generate
+
 ## 0.2.4 (2013-12-16)
 
 * Generate sublime-project file

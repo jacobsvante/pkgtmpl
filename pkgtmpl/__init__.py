@@ -34,7 +34,7 @@ FILENAMES = {
         'requirements_test.txt',
         'setup.py',
         'tox.ini',
-        '_pkgname_.sublime-project',
+        '_appname_.sublime-project',
         '_pkgname_/__init__.py',
         '_pkgname_/metadata.py',
         '_pkgname_/tests.py',
@@ -111,14 +111,20 @@ def generate_files(package_type, app_path, template_context):
     os.mkdir(app_path)
     print('Created directory {0}'.format(app_path))
     for fn in FILENAMES[package_type]:
-        dest_fn = fn.replace('_pkgname_', template_context['package_name'])
+        dest_fn = fn
 
+        # Replace any template variables found in filenames (prefixed and
+        # suffixed with an underscore.)
+        for key, val in template_context.items():
+            dest_fn = dest_fn.replace('_{0}_'.format(key), val)
+
+        # Create any sub-directories found in filenames
         if '/' in dest_fn:
-            # NOTE: Currently only supports one level sub-directory
             dirname = dest_fn.partition('/')[0]
             subdir_path = os.path.join(app_path, dirname)
             if not os.path.exists(subdir_path):
-                os.mkdir(subdir_path)
+                print('Created directory {0}'.format(subdir_path))
+                os.makedirs(subdir_path)
 
         savepath = os.path.join(app_path, dest_fn)
         tmpl = env.get_template(fn)
@@ -137,7 +143,7 @@ def generate(appname, app_path, package_type, package_name=None,
     app_path = expand_path(app_path)
     config = SimpleConfig(expand_path(config_path), GENERAL_CONFIG_SECTION)
     config.appname = appname
-    config.package_name = package_name or appname.lower().replace('-', '_')
+    config.pkgname = package_name or appname.lower().replace('-', '_')
     validate_package_type_exists(package_type)
     validate_config_attrs(config)
     validate_app_path(app_path)
