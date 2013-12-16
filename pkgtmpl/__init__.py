@@ -7,12 +7,14 @@ from datetime import datetime
 import jinja2
 
 try:
-    import configparser # py3
+    import configparser  # py3
 except ImportError:
-    import ConfigParser as configparser # py2
+    import ConfigParser as configparser  # py2
+
 
 def expand_path(path):
     return os.path.abspath(os.path.expanduser(path))
+
 
 DEFAULT_CONFIG_PATH = expand_path('~/.config/pkgtmpl.ini')
 
@@ -32,9 +34,10 @@ FILENAMES = {
         'requirements_test.txt',
         'setup.py',
         'tox.ini',
-        'pkgname/__init__.py',
-        'pkgname/metadata.py',
-        'pkgname/tests.py',
+        '_pkgname_.sublime-project',
+        '_pkgname_/__init__.py',
+        '_pkgname_/metadata.py',
+        '_pkgname_/tests.py',
     )
 }
 
@@ -108,23 +111,21 @@ def generate_files(package_type, app_path, template_context):
     os.mkdir(app_path)
     print('Created directory {0}'.format(app_path))
     for fn in FILENAMES[package_type]:
+        dest_fn = fn.replace('_pkgname_', template_context['package_name'])
 
-        if fn.startswith('pkgname/'):
-            _, _, subdir_fn = fn.partition('/')
-            pkg_path = os.path.join(app_path,
-                                        template_context['package_name'])
-            print('pkg_path', pkg_path)
-            savepath = os.path.join(pkg_path, subdir_fn)
-            if not os.path.exists(pkg_path):
-                os.mkdir(pkg_path)
-        else:
-            savepath = os.path.join(app_path, fn)
+        if '/' in dest_fn:
+            # NOTE: Currently only supports one level sub-directory
+            dirname = dest_fn.partition('/')[0]
+            subdir_path = os.path.join(app_path, dirname)
+            if not os.path.exists(subdir_path):
+                os.mkdir(subdir_path)
 
+        savepath = os.path.join(app_path, dest_fn)
         tmpl = env.get_template(fn)
         filecontents = tmpl.render(**template_context)
         with open(savepath, 'w') as fh:
             fh.write(filecontents)
-        print('Generated file {0}'.format(os.path.join(app_path, fn)))
+        print('Generated file {0}'.format(savepath))
 
 
 def git_init(app_path):
@@ -141,7 +142,7 @@ def generate(appname, app_path, package_type, package_name=None,
     validate_config_attrs(config)
     validate_app_path(app_path)
     tmpl_context = {k: v for k, v in vars(config).items()
-                                 if not k.startswith('_')}
+                    if not k.startswith('_')}
     tmpl_context['today'] = datetime.now().strftime('%Y-%m-%d')
     tmpl_context['year'] = tmpl_context['today'][0:4]
 
@@ -156,9 +157,10 @@ def main():
     )
     parser.add_argument('appname', help='The name of the package')
     parser.add_argument('app_path', help='Path to create the project in')
-    parser.add_argument('-p', '--package-name', help='Name of the package to '
-        'create inside the app dir. Defaults to the the app name in lowercase '
-        'and with dashes replaced with underscores.')
+    parser.add_argument('-p', '--package-name',
+                        help='Name of the package to create inside the app '
+                             'dir. Defaults to the the app name in lowercase '
+                             'and with dashes replaced with underscores.')
     parser.add_argument('-P', '--package-type',
                         help='The type of package to generate',
                         default='python')

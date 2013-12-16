@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.4 (2013-12-16)
+
+* Generate sublime-project file
+* Report correct destination path
+
 ## 0.2.3 (2013-11-09)
 
 * Add PyPI version and download badges to readme
